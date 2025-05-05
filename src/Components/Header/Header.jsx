@@ -1,6 +1,6 @@
 import './Header.scss';
 import Logo from './assets/settings-timer.svg'
-export default function Header(){
+export default function Header({openModal}){
     return(
         <header className="header">
             <div className="container">
@@ -9,7 +9,7 @@ export default function Header(){
                     <h1>pomodoro</h1>
                 </div>
                 <div className="settings">
-                    <img src={Logo} alt="se" />
+                    <img src={Logo} alt="se" onClick={openModal}/>
                 </div>
             </div>
         </header>

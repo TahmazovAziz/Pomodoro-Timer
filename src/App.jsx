@@ -1,13 +1,23 @@
 import Main from './Components/Main/Main'
 import Header from './Components/Header/Header'
-function App() {
-  
+import { useState } from 'react';
+import Modal from './Components/Modal/Modal';
 
+function App() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [DefoultSet, setDefoultSet] = useState({
+          work:25,
+          longBreack:15,
+          break:5,
+    })
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
   return (
     <>
     <div className="wrapper">
-      <Header />
-      <Main/>
+      <Header openModal={openModal}/>
+      <Modal isVisible={isOpen} onClose={closeModal} DefoultSet={DefoultSet} setDefoultSet={setDefoultSet}></Modal>
+      <Main DefoultSet={DefoultSet}/>
     </div>
     </>
   )
