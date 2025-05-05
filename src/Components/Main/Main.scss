@@ -1,0 +1,52 @@
+@use '../../styles/base/fonts';
+
+.timer{
+    font-family: "Roboto";
+    margin: 0 auto;
+    max-width: 400px;
+    position: relative;
+    font-size: 50px;
+    &__control{
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translateX(-50%); 
+    }
+    &__modes{
+        font-size: 20px;
+        display: flex;
+        justify-content: space-between;
+        button{
+            padding: 10px;
+            border-radius: 5px;
+            background: #b2f2bb;
+            transition: 1s;
+            &:hover{
+                box-shadow: -1px 6px 57px 0px #b2f2bb;
+                transition: 1s;
+            }
+        }
+        .work{
+            background: #ffc9c9;
+            color: #000; 
+            &:hover{
+                box-shadow: -1px 6px 57px 0px #ffc9c9;
+            }
+        }
+
+    }
+    &__button{
+        max-width: 50px;
+        margin: 0 auto;
+      
+    }
+
+    .stop{
+     display: none;   
+    }
+}
+.confirm{
+    button{
+        background: rgb(0, 0, 0);
+    }
+}

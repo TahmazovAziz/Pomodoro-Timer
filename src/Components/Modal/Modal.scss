@@ -1,0 +1,115 @@
+
+  #openSettingsBtn {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    padding: 14px 28px;
+    font-size: 18px;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(101, 71, 255, 0.4);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      background: linear-gradient(135deg, #5b0ecb, #1a5ce8);
+      box-shadow: 0 8px 20px rgba(101, 71, 255, 0.6);
+    }
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+  }
+  
+  .popup {
+    font-family: "Roboto";
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 40px;
+    width: 360px;
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.12),
+      0 16px 48px rgba(0, 0, 0, 0.08);
+    animation: popupFadeIn 0.3s ease forwards;
+    margin: 130px auto;
+  
+    h2 {
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-weight: 700;
+      font-size: 26px;
+      color: #4a4a4a;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+  
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #555;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+  
+    input[type='number'] {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+      outline-color: transparent;
+      box-sizing: border-box;
+      color: #333;
+      font-weight: 500;
+  
+      &:focus {
+        border-color: #6a11cb;
+        outline-color: #6a11cb;
+        box-shadow: 0 0 8px rgba(106, 17, 203, 0.4);
+      }
+    }
+  
+    button{
+      margin-top: 20px;
+      width: 100%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border: none;
+      padding: 14px 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(101, 71, 255, 0.5);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+  
+      &:hover {
+        background: linear-gradient(135deg, #5b0ecb, #1a5ce8);
+        box-shadow: 0 8px 24px rgba(101, 71, 255, 0.7);
+      }
+    }
+  }
+  
+  @keyframes popupFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

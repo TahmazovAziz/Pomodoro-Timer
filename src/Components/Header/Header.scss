@@ -1,0 +1,26 @@
+@use '../../styles/base/fonts';
+header{
+    background: rgba(255, 255, 255, 0);
+    color: #f00;
+    border-bottom: 2px solid black;
+    .logo{
+        font-family: "PlayWrite";
+        font-size: 26px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .settings{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+
+}
