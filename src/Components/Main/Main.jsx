@@ -8,14 +8,14 @@ import workSound from './assets/sound_for_work.mp3';
 import breakSound from './assets/sound_for_breack.mp3';
 export default function Main({DefoultSet}){
     const [run, setRun] = useState(false);
-    const [min, setMin] = useState(5)
-    const [secod, setSecod] = useState(60)
-    const play = useRef(null)
-    const stop = useRef(null)
-    const  [totalSecond, setTotalSecond] = useState(0)
+    const [min, setMin] = useState(4);
+    const [secod, setSecod] = useState(59);
+    const play = useRef(null);
+    const stop = useRef(null);
+    const  [totalSecond, setTotalSecond] = useState(0);
     const animateRef = useRef(null);
-    const [currentVideo, setCurrentVideo] = useState('relax')
-    const [playSound, setPlaySound] = useState(false)
+    const [currentVideo, setCurrentVideo] = useState('relax');
+    const [playSound, setPlaySound] = useState(false);
     const alarmSoundRef = useRef(new Audio(alarm));
     const workSoundRef = useRef(new Audio(workSound));
     const breakSoundRef = useRef(new Audio(breakSound));
@@ -89,12 +89,11 @@ export default function Main({DefoultSet}){
 
     }
     const Breack = () =>{
-        setMin(DefoultSet.longBreack);
-        setCurrentVideo('relax');
+        setMin(DefoultSet.break);
         BreackSoundPlayer()
     }
     const LongBreack = () =>{
-        setMin(DefoultSet.break);
+        setMin(DefoultSet.longBreack);
         BreackSoundPlayer()
     }
     return(

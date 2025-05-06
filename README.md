@@ -1,12 +1,25 @@
-# React + Vite
+# 🍅 Pomodoro Timer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Pomodoro Timer** — это приложение для управления временем по технике Pomodoro. Помогает сосредоточиться на задачах, чередуя периоды работы и отдыха.
 
-Currently, two official plugins are available:
+![Описание изображения](main.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Функционал 
+- Стандартные настройки времени: работа - 25 мин, отдых - 5 мин, большой отдых - 15 мин 
+- Возможность редактирования времени работы и отдыха под свои предпочтения 
+- Звуковые эффекты во время работы и отдыха
+- Звуковое уведомление по окончании каждого периода 
+- Интуитивно понятный интерфейс с кнопками запуска, паузы
+## Технологии 
+- React.js
+- JavaScript (ES6+) 
+- CSS для стилизации 
+## Установка и запуск
+```bash
+git clone 
+cd pomodoro-timer  
+npm install  
+npm run dev
+```
