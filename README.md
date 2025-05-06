@@ -18,7 +18,7 @@
 - CSS для стилизации 
 ## Установка и запуск
 ```bash
-git clone 
+git clone https://github.com/TahmazovAziz/Pomodoro-Timer.git
 cd pomodoro-timer  
 npm install  
 npm run dev
