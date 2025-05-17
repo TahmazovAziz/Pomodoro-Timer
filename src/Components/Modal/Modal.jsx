@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 import './Modal.scss';
 
-export default function Modal({isVisible,setDefoultSet,DefoultSet,children, onClose}){
-    useEffect(()=>{
-        const handleKeyDown = (e) => {
-            if (e.key === 'Escape') onClose();
-          };
-    }, [onClose])
+export default function Modal({isVisible,setDefoultSet,DefoultSet,onClose}){
 
     if (!isVisible) return null;
     return(
@@ -17,7 +12,7 @@ export default function Modal({isVisible,setDefoultSet,DefoultSet,children, onCl
         role="dialog"
         aria-modal="true"
         aria-labelledby="popupTitle"
-        style={{ display: 'block' }} // Управляйте видимостью через состояние в React
+        style={{ display: 'block' }} 
     >
         <div className="popup" role="document">
         <h2 id="popupTitle">Настройки времени</h2>
@@ -53,8 +48,8 @@ export default function Modal({isVisible,setDefoultSet,DefoultSet,children, onCl
             name="longBreak"
             min="1"
             max="120"
-            defaultValue={DefoultSet.longBreack}
-            onChange={(e)=>setDefoultSet({...DefoultSet, longBreack:Number(e.target.value)})}
+            defaultValue={DefoultSet.longBreak}
+            onChange={(e)=>setDefoultSet({...DefoultSet, longBreak:Number(e.target.value)})}
             required
             />
             <button onClick={onClose}>Закрыть</button>

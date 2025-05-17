@@ -2,16 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import Relax from './assets/relax.mp4';
 import Work from './assets/work.mp4';
 import './Main.scss';
-import Modal from '../Modal/Modal';
 import alarm from './assets/alarm.mp3';
 import workSound from './assets/sound_for_work.mp3';
 import breakSound from './assets/sound_for_breack.mp3';
+import Button from '../Button/Button';
+import Video from '../Video/Video';
+import Circle from '../Circle/Circle';
 export default function Main({DefoultSet}){
     const [run, setRun] = useState(false);
     const [min, setMin] = useState(4);
-    const [secod, setSecod] = useState(59);
-    const play = useRef(null);
-    const stop = useRef(null);
+    const [second, setsecond] = useState(59);
     const  [totalSecond, setTotalSecond] = useState(0);
     const animateRef = useRef(null);
     const [currentVideo, setCurrentVideo] = useState('relax');
@@ -19,6 +19,8 @@ export default function Main({DefoultSet}){
     const alarmSoundRef = useRef(new Audio(alarm));
     const workSoundRef = useRef(new Audio(workSound));
     const breakSoundRef = useRef(new Audio(breakSound));
+    console.log(run);
+    
     
     const video = {
         relax:Relax,
@@ -26,20 +28,20 @@ export default function Main({DefoultSet}){
     };
 
     useEffect(() => {
-        setTotalSecond(min * 60 + secod);
-    }, [min, secod])
+        setTotalSecond(min * 60 + second);
+    }, [min, second])
     useEffect(()=>{
         const interval = setInterval(()=>{
             if(run){
                 
-                    setSecod((secod) => secod - 1);
-                    if (secod < 1){
+                    setsecond((second) => second - 1);
+                    if (second < 1){
                         setMin(min - 1);
-                        setSecod(5);
-                        if(min <= 0 && secod == 0){
+                        setsecond(59);
+                        if(min <= 0 && second == 0){
                             setRun(false);
                             setMin(0);
-                            setSecod(0);
+                            setsecond(0);
                             if (!playSound) {
                                 alarmSoundRef.current.play();
                             }
@@ -54,110 +56,71 @@ export default function Main({DefoultSet}){
                 
         }, 1000)
         return () => clearInterval(interval);
-    }, [run, min, secod, playSound])
+    }, [run, min, second, playSound])
     
     
     const Star = () =>{
         setRun(true);
-        play.current.style.display = 'none'
-        stop.current.style.display = 'block'
-        setTotalSecond(min * 60 + secod)
+        let mol = min * 60
+        setTotalSecond(mol + second)
         setPlaySound(false);
         
     }
     const Stop = () =>{
         setRun(false);
-        stop.current.style.display = 'none'
-        play.current.style.display = 'block'
         alarmSoundRef.current.pause();
         alarmSoundRef.current.currentTime = 0;
         setPlaySound(true);
         
     }
-    const BreackSoundPlayer = () =>{
+    const BreakSoundPlayer = () =>{
         breakSoundRef.current.loop = true;
         breakSoundRef.current.play();
         workSoundRef.current.pause();
         setCurrentVideo('relax')
+        setsecond(59)
     }
     const WorkTime = () =>{
         setMin(DefoultSet.work);
         setCurrentVideo('work');
+        setsecond(59)
         workSoundRef.current.loop = true;
         workSoundRef.current.play();        
         breakSoundRef.current.pause();
 
     }
-    const Breack = () =>{
+    const Break = () =>{
         setMin(DefoultSet.break);
-        BreackSoundPlayer()
+        BreakSoundPlayer()
     }
-    const LongBreack = () =>{
-        setMin(DefoultSet.longBreack);
-        BreackSoundPlayer()
+    const LongBreak = () =>{
+        setMin(DefoultSet.longBreak);
+        BreakSoundPlayer()
     }
     return(
         <main className="main">
-            <video
-                key={currentVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                zIndex: -1,
-                top: 0,
-                left: 0
-                }}
-            >
-                <source src={video[currentVideo]} type="video/mp4" />
-            </video>
+            <Video currentVideo={currentVideo} video={video} />
             <div className="container">
                 <div className="timer">
-                    <div className="timer__display">
-                    <svg
-                        ref={animateRef}
-                        width="400"
-                        height="400"
-                        viewBox="0 0 200 200"
-                        style={{ display: "block" }}
-                    >
-                        <circle
-                        cx="100"
-                        cy="100"
-                        r="90"
-                        stroke="blue"
-                        strokeWidth="4"
-                        fill="none"
-                        strokeDasharray="566"
-                        >
-                        <animate
-                            attributeName="stroke-dashoffset"
-                            from="0"
-                            to="566"
-                            dur={`${totalSecond}s`}
-                            fill="freeze"
-                        />
-                        </circle>
-                    </svg>
-                    </div>
+                    <Circle animateRef={animateRef} totalSecond={totalSecond}/>
                     <div className="timer__control">
                         <div className="timer__number">
-                            <span>{min}:{secod}</span>
+                            <span>{min}:{second < 10 ? `0${second}` : second}</span>
                         </div>
                         <div className="timer__button">
-                            <button className="play" ref={play} onClick={Star}>▶</button>
-                            <button className="stop" ref={stop}  onClick={Stop}>⏹</button>
+                            {!run ? 
+                            <Button  PlayerState={Star}>▶</Button>
+                            : 
+                            <Button  PlayerState={Stop}>⏹</Button>
+                            }
+
+                            
                         </div>
                     </div>
                     <div className="timer__modes">
-                        <button className="work" onClick={WorkTime}>Работа</button>
-                        <button className="long-break" onClick={LongBreack}>Большой перерыв</button>
-                        <button className="break" onClick={Breack}>перерыв</button>
+                        <Button  ButtonClass={"work"} PlayerState={WorkTime} >Работа</Button>
+                        <Button  ButtonClass={"long-break"} PlayerState={LongBreak} >Длинный перерыв</Button>
+                        <Button  ButtonClass={"break"} PlayerState={Break} >перерыв</Button>
                     </div>
                 </div>
             </div>
