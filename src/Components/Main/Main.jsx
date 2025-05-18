@@ -8,56 +8,30 @@ import breakSound from './assets/sound_for_breack.mp3';
 import Button from '../Button/Button';
 import Video from '../Video/Video';
 import Circle from '../Circle/Circle';
+import usePlayer from '../../hooks/usePlayer';
+
 export default function Main({DefoultSet}){
-    const [run, setRun] = useState(false);
-    const [min, setMin] = useState(4);
-    const [second, setsecond] = useState(59);
-    const  [totalSecond, setTotalSecond] = useState(0);
-    const animateRef = useRef(null);
+    const {
+        run,
+        setRun,
+        min, 
+        setMin, 
+        second, 
+        setSecond, 
+        totalSecond, 
+        setTotalSecond, 
+        setPlaySound, 
+        animateRef
+    } = usePlayer()
     const [currentVideo, setCurrentVideo] = useState('relax');
-    const [playSound, setPlaySound] = useState(false);
     const alarmSoundRef = useRef(new Audio(alarm));
     const workSoundRef = useRef(new Audio(workSound));
     const breakSoundRef = useRef(new Audio(breakSound));
-    console.log(run);
-    
-    
+
     const video = {
         relax:Relax,
         work:Work,
     };
-
-    useEffect(() => {
-        setTotalSecond(min * 60 + second);
-    }, [min, second])
-    useEffect(()=>{
-        const interval = setInterval(()=>{
-            if(run){
-                
-                    setsecond((second) => second - 1);
-                    if (second < 1){
-                        setMin(min - 1);
-                        setsecond(59);
-                        if(min <= 0 && second == 0){
-                            setRun(false);
-                            setMin(0);
-                            setsecond(0);
-                            if (!playSound) {
-                                alarmSoundRef.current.play();
-                            }
-                        }
-                    }
-                    animateRef.current.unpauseAnimations();
-                }
-                else{
-                    setRun(false);  
-                    animateRef.current.pauseAnimations();
-                }
-                
-        }, 1000)
-        return () => clearInterval(interval);
-    }, [run, min, second, playSound])
-    
     
     const Star = () =>{
         setRun(true);
@@ -78,12 +52,12 @@ export default function Main({DefoultSet}){
         breakSoundRef.current.play();
         workSoundRef.current.pause();
         setCurrentVideo('relax')
-        setsecond(59)
+        setSecond(59)
     }
     const WorkTime = () =>{
         setMin(DefoultSet.work);
         setCurrentVideo('work');
-        setsecond(59)
+        setSecond(59)
         workSoundRef.current.loop = true;
         workSoundRef.current.play();        
         breakSoundRef.current.pause();
