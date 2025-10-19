@@ -49,12 +49,12 @@ export default function Main({DefoultSet}){
         breakSoundRef.current.play();
         workSoundRef.current.pause();
         setCurrentVideo('relax')
-        setSecond(59)
+        setSecond(0)
     }
     const WorkTime = () =>{
         setMin(DefoultSet.work);
         setCurrentVideo('work');
-        setSecond(59)
+        setSecond(0)
         workSoundRef.current.loop = true;
         workSoundRef.current.play();        
         breakSoundRef.current.pause();
@@ -64,6 +64,7 @@ export default function Main({DefoultSet}){
     }
     const Break = () =>{
         setMin(DefoultSet.break);
+        setSecond(0)
         BreakSoundPlayer()
         setInitialTime(DefoultSet.break * 60);
 

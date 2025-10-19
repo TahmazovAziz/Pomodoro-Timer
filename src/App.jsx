@@ -6,9 +6,9 @@ import Modal from './Components/Modal/Modal';
 function App() {
     const [isOpen, setIsOpen] = useState(false);
     const [DefoultSet, setDefoultSet] = useState({
-          work:24,
-          longBreak:14,
-          break:4,
+          work:25,
+          longBreak:15,
+          break:5,
     })
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
