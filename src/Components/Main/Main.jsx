@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import Relax from './assets/relax.mp4';
 import Work from './assets/work.mp4';
 import './Main.scss';
-import alarm from './assets/alarm.mp3';
 import workSound from './assets/sound_for_work.mp3';
 import breakSound from './assets/sound_for_breack.mp3';
 import Button from '../Button/Button';
@@ -18,15 +17,15 @@ export default function Main({DefoultSet}){
         setMin, 
         second, 
         setSecond, 
-        totalSecond, 
-        setTotalSecond, 
-        setPlaySound, 
-        animateRef
+        setPlaySound,
+        initialTime,
+        setInitialTime,
+        alarmSoundRef
     } = usePlayer()
     const [currentVideo, setCurrentVideo] = useState('relax');
-    const alarmSoundRef = useRef(new Audio(alarm));
     const workSoundRef = useRef(new Audio(workSound));
     const breakSoundRef = useRef(new Audio(breakSound));
+
 
     const video = {
         relax:Relax,
@@ -35,8 +34,6 @@ export default function Main({DefoultSet}){
     
     const Star = () =>{
         setRun(true);
-        let mol = min * 60
-        setTotalSecond(mol + second)
         setPlaySound(false);
         
     }
@@ -61,22 +58,27 @@ export default function Main({DefoultSet}){
         workSoundRef.current.loop = true;
         workSoundRef.current.play();        
         breakSoundRef.current.pause();
+        setInitialTime(DefoultSet.work * 60);
+
 
     }
     const Break = () =>{
         setMin(DefoultSet.break);
         BreakSoundPlayer()
+        setInitialTime(DefoultSet.break * 60);
+
     }
     const LongBreak = () =>{
         setMin(DefoultSet.longBreak);
         BreakSoundPlayer()
+        setInitialTime(DefoultSet.longBreack * 60);
     }
     return(
         <main className="main">
             <Video currentVideo={currentVideo} video={video} />
             <div className="container">
                 <div className="timer">
-                    <Circle animateRef={animateRef} totalSecond={totalSecond}/>
+                    <Circle run={run} min={min} second={second} initialTime={initialTime} currentVideo={currentVideo}/>
                     <div className="timer__control">
                         <div className="timer__number">
                             <span>{min}:{second < 10 ? `0${second}` : second}</span>
@@ -94,7 +96,7 @@ export default function Main({DefoultSet}){
                     <div className="timer__modes">
                         <Button  ButtonClass={"work"} PlayerState={WorkTime} >Работа</Button>
                         <Button  ButtonClass={"long-break"} PlayerState={LongBreak} >Длинный перерыв</Button>
-                        <Button  ButtonClass={"break"} PlayerState={Break} >перерыв</Button>
+                        <Button  ButtonClass={"break"} PlayerState={Break} >Перерыв</Button>
                     </div>
                 </div>
             </div>
